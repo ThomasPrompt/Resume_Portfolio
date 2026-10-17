@@ -15,7 +15,6 @@ export function OnePagerModal({ isOpen, onClose }: OnePagerModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-150">
       <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-6 sm:p-8 text-zinc-100 shadow-2xl print:max-h-none print:border-none print:bg-white print:text-black print:p-0">
-        {/* Top Action Bar (Hidden in Print) */}
         <div className="flex items-center justify-between pb-5 mb-6 border-b border-zinc-800/80 print:hidden">
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-indigo-400" />
@@ -41,7 +40,6 @@ export function OnePagerModal({ isOpen, onClose }: OnePagerModalProps) {
           </div>
         </div>
 
-        {/* Executive Header */}
         <div className="border-b border-zinc-800/80 pb-6 mb-6 print:border-zinc-300">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white print:text-black">
             {PORTFOLIO_DATA.hero.name}
@@ -60,7 +58,7 @@ export function OnePagerModal({ isOpen, onClose }: OnePagerModalProps) {
               className="inline-flex items-center gap-1.5 hover:text-zinc-200"
             >
               <Linkedin className="h-3.5 w-3.5 text-indigo-400" />
-              linkedin.com/in/tom-deutsch
+              linkedin.com/in/tom-deutsch-7a8230b4
             </a>
             <a
               href={PORTFOLIO_DATA.hero.ctas.email}
@@ -72,59 +70,34 @@ export function OnePagerModal({ isOpen, onClose }: OnePagerModalProps) {
           </div>
         </div>
 
-        {/* Three Cleanly Separated Domains */}
-        <div className="space-y-5">
-          {PORTFOLIO_DATA.domains.map((domain, idx) => (
+        <div className="space-y-4">
+          {PORTFOLIO_DATA.pillars.map((pillar, idx) => (
             <div
-              key={domain.id}
-              className="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-4 sm:p-5 print:border-zinc-300 print:bg-transparent"
+              key={pillar.id}
+              className="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-4 print:border-zinc-300 print:bg-transparent"
             >
               <div className="flex items-center justify-between gap-2 mb-2">
                 <div className="flex items-center gap-2">
                   {idx === 0 && <Cpu className="h-4 w-4 text-indigo-400" />}
                   {idx === 1 && <Layers className="h-4 w-4 text-cyan-400" />}
                   {idx === 2 && <Shield className="h-4 w-4 text-emerald-400" />}
-                  <h3 className="text-sm sm:text-base font-semibold text-zinc-100 print:text-black">
-                    {domain.title}
+                  <h3 className="text-sm font-semibold text-zinc-100 print:text-black">
+                    {pillar.title}
                   </h3>
                 </div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
-                  {domain.index}
+                <span className="text-[10px] font-mono text-zinc-500">
+                  {pillar.subtitle}
                 </span>
               </div>
 
-              <p className="text-xs text-zinc-400 print:text-zinc-700 mb-3">
-                {domain.description}
-              </p>
-
-              <div className="space-y-3">
-                {domain.highlights.map((h) => (
-                  <div
-                    key={h.companyOrRole}
-                    className="rounded-lg border border-zinc-800/60 bg-zinc-950/60 p-3 print:border-zinc-200"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-                      <span className="text-xs font-semibold text-zinc-200 print:text-black">
-                        {h.companyOrRole}
-                      </span>
-                      <span className="text-[10px] font-mono text-zinc-400">
-                        {h.badge}
-                      </span>
-                    </div>
-                    <p className="text-xs text-zinc-400 print:text-zinc-700 mb-2">
-                      {h.summary}
-                    </p>
-                    <ul className="space-y-1 text-xs text-zinc-300 print:text-zinc-800">
-                      {h.bullets.map((b, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-indigo-400 mt-0.5">•</span>
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              <ul className="space-y-1 text-xs text-zinc-300 print:text-zinc-800">
+                {pillar.bullets.map((b, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-indigo-400 mt-0.5">•</span>
+                    <span>{b}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>

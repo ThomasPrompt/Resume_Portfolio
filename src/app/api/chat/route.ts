@@ -9,7 +9,7 @@ STRICT DOMAIN SEPARATION & CORE FACTS:
    - Name: Tom Deutsch
    - Title: Senior Product Manager & AI Systems Architect
    - Value Proposition: Expert in architecting enterprise AI platforms, autonomous agents, and mission-critical systems from inception to scale.
-   - LinkedIn: https://www.linkedin.com/in/tom-deutsch
+   - LinkedIn: https://www.linkedin.com/in/tom-deutsch-7a8230b4
    - Email: tomdeutsch86@gmail.com
 
 2. DOMAIN 1 — AI & SaaS Product Leadership:
@@ -41,9 +41,9 @@ function getLocalAnswer(query: string): string {
     q.includes("defense") ||
     q.includes("critical")
   ) {
-    return `**Enterprise Platforms & Defense Tech (Critical Systems):**
-- **mPrest:** Tom held a critical, rigorous tenure leading product management and software architecture for complex **Command & Control (C2)** distributed systems—engineering real-time, mission-critical solutions operating under extreme conditions with sub-second latency and zero-failure tolerance.
-- **Elbit Systems:** Tom led complex technical platforms, modular software architectures, and data-intensive operational systems—bridging deep multi-disciplinary engineering with intuitive operator execution.`;
+    return `**Enterprise Platforms & Real-Time Systems:**
+- **Elbit Systems:** Tom directed product strategy and modular software architectures for large-scale, data-intensive operational platforms.
+- **mPrest:** Tom led product management and software architecture for distributed **Command & Control (C2)** systems operating at sub-second latency under mission-critical conditions.`;
   }
 
   if (
@@ -55,11 +55,10 @@ function getLocalAnswer(query: string): string {
     q.includes("command") ||
     q.includes("רב-סרן")
   ) {
-    return `**Command & Leadership — IAF Major (רב-סרן, Res.):**
-Tom serves actively and in the reserves as a **Major (רב-סרן)** and **Iron Dome Battery Commander**. This serves as a foundational executive leadership asset:
-- **High-Stakes Decision-Making:** Split-second operational judgment and accountability under extreme pressure.
-- **Large-Scale Team Management:** Leading, training, and aligning 100+ officers, engineers, and operators.
-- **Complex Real-Time Systems:** Direct hands-on command of distributed air-defense C2 systems in real-world operations.`;
+    return `**Executive Command & Leadership — IAF Major (Res.):**
+Tom serves as a **Major (רב-סרן)** and **Iron Dome Battery Commander**:
+- **High-Stakes Execution:** Split-second operational judgment and accountability under zero-error conditions.
+- **Large-Scale Leadership:** Commanding and aligning 100+ officers, engineers, and operators across distributed real-time units.`;
   }
 
   if (
@@ -71,18 +70,17 @@ Tom serves actively and in the reserves as a **Major (רב-סרן)** and **Iron 
     q.includes("rag") ||
     q.includes("product")
   ) {
-    return `**AI & SaaS Product Leadership:**
-Tom specializes in architecting **enterprise AI platforms, autonomous agents, and distributed SaaS systems** from inception to scale:
-- **Enterprise AI at Scale:** Scaled an internal multi-model AI platform to **~5,000 MAU**, integrating AWS Bedrock, GCP Vertex AI, Azure OpenAI, Anthropic, and LiteLLM.
-- **Agentic Workflows & RAG:** Built permission-aware corporate knowledge graphs, deterministic guardrails, and automated workflows.
-- **Commercial & Technical Rigor:** Combines token economics, PLG adoption, and zero-downtime enterprise system consolidation.`;
+    return `**AI Product & High-Scale SaaS Leadership:**
+Tom specializes in architecting **autonomous AI agents, enterprise LLM platforms, and high-scale SaaS systems**:
+- **Enterprise AI at Scale:** Scaled a multi-LLM agent platform to **~5,000 MAU** (Bedrock, Vertex AI, OpenAI, Anthropic, LiteLLM).
+- **Agentic Workflows & RAG:** Engineered permission-aware RAG, semantic routing, and automated enterprise SaaS workflows across a $4.4B post-merger stack.`;
   }
 
-  if (q.includes("contact") || q.includes("email") || q.includes("linkedin") || q.includes("hire") || q.includes("reach")) {
+  if (q.includes("contact") || q.includes("email") || q.includes("linkedin") || q.includes("hire") || q.includes("reach") || q.includes("cv") || q.includes("resume")) {
     return `**Connect with Tom Deutsch:**
-- **LinkedIn:** https://www.linkedin.com/in/tom-deutsch
+- **LinkedIn:** https://www.linkedin.com/in/tom-deutsch-7a8230b4
 - **Email:** tomdeutsch86@gmail.com
-- **One-Pager / CV:** Click the **"Download CV / One-Pager"** button in the Hero section for a clean printable executive summary.`;
+- **Resume / CV:** Click the **"Download CV"** button in the header or hero section to download \`Tom-Deutsch-CV.pdf\`.`;
   }
 
   return `**Tom Deutsch — Executive Overview:**
