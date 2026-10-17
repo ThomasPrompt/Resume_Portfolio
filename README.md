@@ -1,30 +1,61 @@
-# Tom Deutsch — Executive One-Pager & Portfolio (Next.js App Router)
+# Tom Deutsch — Personal PM Portfolio & Executive One-Pager
 
-A minimalist, dark-mode (Vercel / Linear aesthetic) Executive One-Pager & Portfolio built with **Next.js 14 (App Router)**, **TypeScript**, and **Tailwind CSS**.
+Modern, high-end personal portfolio website and printable Executive One-Pager for **Tom Deutsch** (*Senior Product Manager & AI Systems Architect*). Designed with an elite minimalist aesthetic inspired by **Linear, Vercel, and Stripe**, with full **Dark & Light Mode** support.
 
-## Core Architecture & Sections
+## Key Sections Implemented
 
-1. **Hero Section**
-   - **Name:** Tom Deutsch
-   - **Title:** Senior Product Manager & AI Systems Architect
-   - **Value Proposition:** Architecting autonomous AI agents, enterprise LLM platforms, and high-scale distributed SaaS ecosystems from zero-to-one to global production.
-   - **Action CTAs:** LinkedIn (`https://www.linkedin.com/in/tom-deutsch-7a8230b4`), Direct Download CV (`/Tom-Deutsch-CV.pdf`), and Email.
+1. **Hero Section & Key Metrics Bar (4 Badges)**
+   - **Headline:** *Architecting Enterprise AI Agents & Platforms That Actually Scale.*
+   - **Sub-headline:** Bridging deep technical architectures and commercial ROI—from commanding an Iron Dome system to scaling the U-AI Workspace for ~5,000 active users at Unity.
+   - **Metrics Bar:** `8+ Years`, `~5,000 MAU`, `Full-Spectrum AI Stack (AWS, GCP, Azure, Anthropic, LiteLLM)`, and `Major (Res.) IAF Air Defense Battery Commander`.
+   - **CTAs:** `[View Case Studies ↓]`, `[Download CV]`, and `[LinkedIn / Email]` (with one-click email copy).
 
-2. **Three Balanced Core Pillars (Single-Screen 10-Second Scan)**
-   - **01 // AI Product & High-Scale SaaS:** Enterprise AI agents, multi-LLM platforms (~5,000 MAU), RAG, and high-scale SaaS workflows.
-   - **02 // Enterprise & Real-Time Systems:** Product & system architecture across **Elbit Systems** (operational platforms) and **mPrest** (distributed real-time C2).
-   - **03 // Executive Command & Execution:** **IAF Major (Res.) & Iron Dome Battery Commander** leading 100+ personnel in high-stakes real-time execution.
+2. **What I Bring to the Table (The 3 Pillars)**
+   - **Pillar 01 — Commercial AI & "Build vs. Buy" Strategy:** Token Economics & P&L mindset, defensible proprietary data moats, and ruthless MVP scoping.
+   - **Pillar 02 — Technical Depth: Agentic Systems & Architecture:** Context-aware AI (Semantic RAG, entity graphs, multi-model routing), trust and guardrails (hallucination control and proactive fallbacks).
+   - **Pillar 03 — Product-Led Growth (PLG) & Zero-Friction UX:** Treating internal/enterprise users as paying customers, omnichannel execution (Web and Slack), and dual-experience architecture (casual users vs. advanced technical power users).
 
-3. **Interactive AI Chat Widget (`AskTomsAIWidget.tsx` + `/api/chat`)**
-   - Floating corner AI assistant allowing recruiters and executives to interactively query Tom's background across AI/SaaS, C2/Defense (mPrest & Elbit), and IAF command leadership.
-   - Works out-of-the-box via its built-in domain knowledge engine, or connects to live Gemini 2.0 Flash when `GEMINI_API_KEY` is set.
+3. **Selected Case Studies**
+   - **Case Study 01:** *U-AI Workspace (Enterprise AI Operating System at Unity)* — Scale (~5,000 MAU), Problem, Strategy & Lean MVP, Solution & Dual-UX, and Impact.
+   - **Case Study 02:** *Post-Merger Infrastructure & System Consolidation (Unity & ironSource $4.4B Merger)* — Zero-downtime migration hierarchy across Finance, HR, Procurement, and IT.
+   - **Case Study 03:** *System Engineer For Mission-Critical Command & Control (C2) Platforms (Elbit Systems, mPrest & Israeli Air Force)* — Real-time, low-cognitive-load C2 and Iron Dome interfaces.
 
-4. **Vercel Hobby Tier Ready (`vercel.json`)**
-   - Zero multi-region restrictions (`"regions"` is intentionally omitted) for frictionless deployment on Vercel's free Hobby tier.
+4. **Thought Leadership (Published Articles & Insights)**
+   - *Building the Enterprise AI Workspace*
+   - *Why Product Managers Must Master Token Economics*
+
+5. **Interactive Feature: "Ask Tom's AI" Widget + Printable Executive One-Pager**
+   - Floating chat widget connected to `/api/chat` (Google AI Studio `gemini-2.0-flash` API endpoint + built-in portfolio RAG knowledge base fallback) and an embedded widget snippet viewer.
+
+---
 
 ## Local Development
 
 ```bash
 npm install
 npm run dev
+```
+
+Open `http://localhost:3000`.
+
+---
+
+## Deployment
+
+### Option A: Google Cloud Run (GCP)
+
+This repository includes a multi-stage production `Dockerfile` (using Next.js `output: "standalone"` on port `8080`) and `cloudbuild.yaml`.
+
+```bash
+gcloud run deploy tom-deutsch-portfolio \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-env-vars="GOOGLE_AI_STUDIO_API_KEY=your_key_here"
+```
+
+### Option B: Vercel
+
+```bash
+npx vercel --prod
 ```

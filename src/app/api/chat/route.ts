@@ -1,93 +1,130 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 
-const SYSTEM_INSTRUCTION = `You are Tom Deutsch's Interactive AI Portfolio Assistant embedded on his Executive One-Pager & Portfolio Website.
-Your role is to give recruiters, hiring executives, VPs of Product, and founders clear, concise, high-signal answers about Tom's background, product leadership, and systems architecture expertise.
+const SYSTEM_INSTRUCTION = `You are "Ask Tom's AI", the interactive AI Portfolio Agent for Tom Deutsch (Senior Product Manager & AI Systems Architect), powered by Google AI Studio.
+Your audience includes Hiring Managers, VPs of Product, CTOs, Founders, and Executive Recruiters evaluating Tom's portfolio.
 
-STRICT DOMAIN SEPARATION & CORE FACTS:
-1. PROFILE:
+CORE KNOWLEDGE BASE:
+1. HERO & EXECUTIVE SUMMARY:
    - Name: Tom Deutsch
-   - Title: Senior Product Manager & AI Systems Architect
-   - Value Proposition: Expert in architecting enterprise AI platforms, autonomous agents, and mission-critical systems from inception to scale.
-   - LinkedIn: https://www.linkedin.com/in/tom-deutsch-7a8230b4
-   - Email: tomdeutsch86@gmail.com
+   - Role: Senior Product Manager & AI Systems Architect
+   - Headline: "Architecting Enterprise AI Agents & Platforms That Actually Scale."
+   - Bio: Bridges deep technical architectures and commercial ROI. From commanding an Iron Dome system (Major Res., IAF Air Defense Battery Commander) to scaling the U-AI Workspace for ~5,000 active users at Unity, Tom turns complex technologies into zero-friction products.
+   - Key Metrics:
+     * 8+ Years | Product & Systems Leadership
+     * ~5,000 MAU | Scaled on Enterprise AI Platform (U-AI Workspace)
+     * Full-Spectrum AI Stack | AWS (Q, Bedrock), GCP (Vertex, AI Studio), Azure, Anthropic and LiteLLM
+     * Major (Res.) | IAF Air Defense Battery Commander
+   - Contact: LinkedIn (https://www.linkedin.com/in/tom-deutsch-7a8230b4) | Email (tomdeutsch86@gmail.com) | CV Download (/Tom-Deutsch-CV.pdf)
 
-2. DOMAIN 1 — AI & SaaS Product Leadership:
-   - Focus: Building enterprise AI platforms, autonomous AI agents, LLM integrations, workflow automation, and distributed SaaS systems at scale.
-   - Key Achievements: Co-architected and scaled an Enterprise AI Platform (U-AI Workspace at Unity) to ~5,000 active global users; multi-cloud LLM orchestration (AWS Bedrock, GCP Vertex AI, Azure OpenAI, Anthropic, LiteLLM), semantic routing, token economics, and permission-aware RAG; led $4.4B post-merger enterprise stack consolidation with zero downtime.
+2. WHAT TOM BRINGS TO THE TABLE (THE 3 PILLARS):
+   - Pillar 1 — Commercial AI & "Build vs. Buy" Strategy:
+     Token Economics & P&L mindset, defensible proprietary data moats, and ruthless MVP scoping.
+   - Pillar 2 — Technical Depth: Agentic Systems & Architecture:
+     Context-aware AI (Semantic RAG, entity graphs, multi-model routing), trust and guardrails (hallucination control and proactive fallbacks).
+   - Pillar 3 — Product-Led Growth (PLG) & Zero-Friction UX:
+     Treating internal/enterprise users as paying customers, omnichannel execution (Web and Slack), and dual-experience architecture (casual users vs. advanced technical power users).
 
-3. DOMAIN 2 — Enterprise Platforms & Defense Tech (Critical Systems):
-   - Elbit Systems: Leading complex technical platforms, software architectures, and data-intensive operational systems from concept to field scale.
-   - mPrest: A critical and rigorous tenure leading product management and architecture for complex Command & Control (C2) distributed software systems and real-time mission-critical solutions under extreme conditions (sub-second latency, multi-node telemetry, zero-failure tolerance).
+3. SELECTED CASE STUDIES:
+   - Case Study 01 — U-AI Workspace (Enterprise AI Operating System at Unity):
+     * Scale: ~5,000 active global users (engineers and non-engineers).
+     * The Problem: Surging demand for GenAI led to fragmented POCs, security risks, and uncontrolled token burn while external tools lacked internal context.
+     * Strategy & Lean MVP: Evaluated the full multi-cloud AI landscape (AWS, GCP, Azure, OpenAI, Anthropic, LiteLLM, etc.) and focused internal R&D strictly on indexing proprietary data moats across corporate repositories (Slack, Confluence, Drive, Zendesk, Gainsight, and more core enterprise systems).
+     * Solution & UX: Co-architected a Dual-Experience Platform (zero-friction Slack/Web assistant alongside an "Advanced Lab" for technical power users), dynamic RAG, prompt caching and semantic routing to lightweight SLMs.
+     * Impact: Scaled organically to ~5,000 users, eliminated hallucination retry loops, slashed inference costs, and built a secure corporate intelligence moat.
+   - Case Study 02 — Post-Merger Infrastructure & System Consolidation (Unity & ironSource $4.4B Merger):
+     * Managed redundant internal applications across Finance, HR, Procurement, IT, etc. Established a ruthless migration hierarchy prioritizing revenue-critical pipelines with strict SLAs, completing global consolidation with zero business downtime.
+   - Case Study 03 — System Engineer For Mission-Critical Command & Control (C2) Platforms (Elbit Systems, mPrest & Israeli Air Force):
+     * Engineered real-time, low-cognitive-load C2 and air defense interfaces (including Iron Dome operations), leading cross-functional integration and engineering collaboration to ensure flawless execution and product success.
 
-4. DOMAIN 3 — Command & Leadership (IAF - Major Res.):
-   - Active and reserve service as a Major (רב-סרן) and Iron Dome Battery Commander in the Israeli Air Force (IAF).
-   - Core Leadership Asset: High-stakes decision-making under extreme pressure, large-scale team management (100+ personnel), and operating complex real-time systems.
+4. THOUGHT LEADERSHIP (PUBLISHED ARTICLES & INSIGHTS):
+   - "Building the Enterprise AI Workspace": Moving beyond chatbots through clean data alignment, proprietary moats, and dual-user design.
+   - "Why Product Managers Must Master Token Economics": Managing unit economics, prompt caching, semantic routing and confidence-score thresholds.
 
-RESPONSE GUIDELINES:
-- Keep answers concise, scannable, and executive-ready (use short bullet points and bold labels).
-- Keep the 3 domains cleanly articulated without muddling them.
-- Keep responses under 140 words unless a deeper breakdown is requested.`;
+RESPONSE STYLE:
+- Be concise, structured, and high-signal (use bullet points and bold highlights).
+- Cite specific metrics (~5,000 MAU, $4.4B merger, zero downtime, AWS Bedrock/GCP Vertex/LiteLLM, Iron Dome Major Res.) where relevant.
+- Keep responses under 150 words unless asked for a deep dive.`;
 
 function getLocalAnswer(query: string): string {
   const q = query.toLowerCase();
 
   if (
-    q.includes("mprest") ||
-    q.includes("elbit") ||
-    q.includes("c2") ||
-    q.includes("command & control") ||
-    q.includes("command and control") ||
-    q.includes("defense") ||
-    q.includes("critical")
+    q.includes("u-ai") ||
+    q.includes("5,000") ||
+    q.includes("5000") ||
+    q.includes("workspace") ||
+    (q.includes("unity") && !q.includes("merger") && !q.includes("4.4"))
   ) {
-    return `**Enterprise Platforms & Real-Time Systems:**
-- **Elbit Systems:** Tom directed product strategy and modular software architectures for large-scale, data-intensive operational platforms.
-- **mPrest:** Tom led product management and software architecture for distributed **Command & Control (C2)** systems operating at sub-second latency under mission-critical conditions.`;
+    return `**Case Study 01: U-AI Workspace (Enterprise AI OS at Unity)**
+- **Scale:** Scaled organically to **~5,000 active global users** (engineers & non-engineers).
+- **Strategy & Lean MVP:** Evaluated AWS (Q, Bedrock), GCP (Vertex, AI Studio), Azure, OpenAI, Anthropic, and LiteLLM—focusing internal R&D strictly on indexing proprietary data moats (**Slack, Confluence, Drive, Zendesk, Gainsight**).
+- **Architecture & UX:** Co-architected a **Dual-Experience Platform** (zero-friction Slack/Web assistant + "Advanced Lab" for power users) powered by dynamic RAG, prompt caching, and semantic routing to lightweight SLMs.
+- **Impact:** Eliminated hallucination retry loops, slashed inference costs, and established a secure corporate intelligence moat.`;
   }
 
   if (
+    q.includes("token") ||
+    q.includes("economic") ||
+    q.includes("build vs") ||
+    q.includes("buy") ||
+    q.includes("cost") ||
+    q.includes("pillar") ||
+    q.includes("thought") ||
+    q.includes("article")
+  ) {
+    return `**Commercial AI, Token Economics & "Build vs. Buy" Strategy:**
+- **Token Economics & P&L Mindset:** Tom manages unit economics from Day 1 via **prompt caching**, **semantic routing to lightweight SLMs**, and strict **confidence-score thresholds** that prevent costly hallucination retry loops.
+- **Ruthless Build vs. Buy:** Rather than rebuilding commoditized foundation capabilities, Tom leverages multi-cloud gateways (**AWS Bedrock, GCP Vertex/AI Studio, Azure, Anthropic, LiteLLM**) and focuses internal engineering on **defensible proprietary data moats**.
+- **Thought Leadership:** Featured in his articles *"Why Product Managers Must Master Token Economics"* and *"Building the Enterprise AI Workspace"*.`;
+  }
+
+  if (
+    q.includes("merger") ||
+    q.includes("ironsource") ||
+    q.includes("4.4") ||
+    q.includes("consolidation") ||
+    q.includes("migration")
+  ) {
+    return `**Case Study 02: Unity & ironSource $4.4B Post-Merger Consolidation**
+- **Challenge:** Redundant internal enterprise applications spanning Finance, HR, Procurement, and IT following the **$4.4B merger**.
+- **Execution:** Established a ruthless migration hierarchy prioritizing **revenue-critical pipelines** governed by strict SLAs.
+- **Impact:** Completed global multi-system consolidation with **zero business downtime**.`;
+  }
+
+  if (
+    q.includes("c2") ||
+    q.includes("command") ||
+    q.includes("iron dome") ||
+    q.includes("elbit") ||
+    q.includes("mprest") ||
     q.includes("iaf") ||
     q.includes("major") ||
-    q.includes("iron dome") ||
-    q.includes("military") ||
-    q.includes("battery") ||
-    q.includes("command") ||
-    q.includes("רב-סרן")
+    q.includes("defense")
   ) {
-    return `**Executive Command & Leadership — IAF Major (Res.):**
-Tom serves as a **Major (רב-סרן)** and **Iron Dome Battery Commander**:
-- **High-Stakes Execution:** Split-second operational judgment and accountability under zero-error conditions.
-- **Large-Scale Leadership:** Commanding and aligning 100+ officers, engineers, and operators across distributed real-time units.`;
+    return `**Case Study 03: Mission-Critical C2 Platforms & IAF Command**
+- **System Engineering (Elbit Systems, mPrest & IAF):** Engineered real-time, **low-cognitive-load Command & Control (C2)** and air defense interfaces (including **Iron Dome** operations), leading cross-functional integration for zero-error execution.
+- **Executive Leadership:** As a **Major (Res.) & IAF Air Defense Battery Commander**, Tom brings calm, high-stakes operational decision-making and cross-functional alignment to enterprise product leadership.`;
   }
 
   if (
-    q.includes("ai") ||
-    q.includes("saas") ||
-    q.includes("llm") ||
-    q.includes("agent") ||
-    q.includes("unity") ||
-    q.includes("rag") ||
-    q.includes("product")
+    q.includes("contact") ||
+    q.includes("email") ||
+    q.includes("linkedin") ||
+    q.includes("hire") ||
+    q.includes("cv") ||
+    q.includes("resume")
   ) {
-    return `**AI Product & High-Scale SaaS Leadership:**
-Tom specializes in architecting **autonomous AI agents, enterprise LLM platforms, and high-scale SaaS systems**:
-- **Enterprise AI at Scale:** Scaled a multi-LLM agent platform to **~5,000 MAU** (Bedrock, Vertex AI, OpenAI, Anthropic, LiteLLM).
-- **Agentic Workflows & RAG:** Engineered permission-aware RAG, semantic routing, and automated enterprise SaaS workflows across a $4.4B post-merger stack.`;
-  }
-
-  if (q.includes("contact") || q.includes("email") || q.includes("linkedin") || q.includes("hire") || q.includes("reach") || q.includes("cv") || q.includes("resume")) {
     return `**Connect with Tom Deutsch:**
 - **LinkedIn:** https://www.linkedin.com/in/tom-deutsch-7a8230b4
 - **Email:** tomdeutsch86@gmail.com
-- **Resume / CV:** Click the **"Download CV"** button in the header or hero section to download \`Tom-Deutsch-CV.pdf\`.`;
+- **Download CV:** Click **"Download CV"** in the top navigation or hero section to get \`Tom-Deutsch-CV.pdf\`, or open the **Executive One-Pager** view for a printable summary.`;
   }
 
-  return `**Tom Deutsch — Executive Overview:**
-Tom is a **Senior Product Manager & AI Systems Architect** whose expertise spans three cleanly defined pillars:
-- **1. AI & SaaS Product Leadership:** Enterprise AI platforms (~5,000 MAU), autonomous agents, multi-LLM orchestration, and workflow automation at scale.
-- **2. Enterprise Platforms & Defense Tech:** Leading complex operational platforms at **Elbit Systems** and distributed real-time Command & Control (C2) architecture at **mPrest**.
-- **3. Command & Leadership (IAF - Major Res.):** **Major (רב-סרן)** and **Iron Dome Battery Commander**, bringing high-stakes decision-making and large-scale team leadership.`;
+  return `**Tom Deutsch — Senior Product Manager & AI Systems Architect**
+- **Enterprise AI at Scale:** Co-architected **U-AI Workspace at Unity (~5,000 MAU)** across AWS (Q, Bedrock), GCP (Vertex, AI Studio), Azure, Anthropic & LiteLLM.
+- **3 Core Pillars:** (1) Commercial AI & "Build vs. Buy" Token Economics, (2) Agentic Systems & Semantic RAG Architecture, (3) PLG & Dual-Experience UX (Slack/Web + Advanced Lab).
+- **Proven Track Record:** Led **$4.4B Unity–ironSource** post-merger consolidation with zero downtime, and engineered **Iron Dome C2** interfaces (**Elbit, mPrest, IAF Major Res.**).`;
 }
 
 export async function POST(req: NextRequest) {
@@ -95,14 +132,19 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const message: string = body?.message || "";
     const history: { role: string; content: string }[] = body?.history || [];
+    const customEndpoint: string | undefined =
+      body?.endpoint || process.env.GOOGLE_AI_STUDIO_ENDPOINT;
 
     if (!message.trim()) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_AI_STUDIO_API_KEY;
+    const apiKey =
+      process.env.GOOGLE_AI_STUDIO_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.NEXT_PUBLIC_GOOGLE_AI_STUDIO_API_KEY;
 
-    if (apiKey) {
+    if (apiKey || customEndpoint) {
       try {
         const contents = [
           ...history.slice(-6).map((msg) => ({
@@ -115,42 +157,44 @@ export async function POST(req: NextRequest) {
           },
         ];
 
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              systemInstruction: {
-                parts: [{ text: SYSTEM_INSTRUCTION }],
-              },
-              contents,
-              generationConfig: {
-                temperature: 0.25,
-                maxOutputTokens: 350,
-              },
-            }),
-          }
-        );
+        const targetUrl =
+          customEndpoint ||
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+        const response = await fetch(targetUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            systemInstruction: {
+              parts: [{ text: SYSTEM_INSTRUCTION }],
+            },
+            contents,
+            generationConfig: {
+              temperature: 0.25,
+              maxOutputTokens: 380,
+            },
+          }),
+        });
 
         if (response.ok) {
           const data = await response.json();
           const reply =
             data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+            data?.reply ||
             getLocalAnswer(message);
           return NextResponse.json({
             reply,
-            mode: "live-llm",
+            mode: "google-ai-studio",
           });
         }
       } catch (err) {
-        console.warn("LLM fallback triggered:", err);
+        console.warn("Google AI Studio endpoint fallback triggered:", err);
       }
     }
 
     return NextResponse.json({
       reply: getLocalAnswer(message),
-      mode: "embedded-knowledge",
+      mode: "embedded-knowledge-graph",
       profile: PORTFOLIO_DATA.hero.name,
     });
   } catch {
