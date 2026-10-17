@@ -97,11 +97,12 @@ export const PORTFOLIO_DATA = {
       description:
         "Token Economics & P&L mindset, defensible proprietary data moats, and ruthless MVP scoping.",
       accentColor: "indigo",
+      tags: ["Token Economics", "Data Moats", "MVP Scoping"],
       highlights: [
         {
           label: "Token Economics & P&L Mindset",
           detail:
-            "Focusing cost-per-query, prompt caching and seamantic model tiering to SLMs.",
+            "Focusing cost-per-query, prompt caching and semantic model tiering to SLMs.",
         },
         {
           label: "Defensible Proprietary Data Moats",
@@ -111,7 +112,7 @@ export const PORTFOLIO_DATA = {
         {
           label: "Ruthless MVP Scoping",
           detail:
-            "Benchmarking AWS, GCP, Azure and Anthropic to buy commodity layers and build high-leverage vertial workflows.",
+            "Benchmarking AWS, GCP, Azure and Anthropic to buy commodity layers and build high-leverage vertical workflows.",
         },
       ],
     },
@@ -123,16 +124,17 @@ export const PORTFOLIO_DATA = {
       description:
         "Context-aware AI (Semantic RAG, entity graphs, multi-model routing), trust and guardrails (hallucination control and proactive fallbacks).",
       accentColor: "cyan",
+      tags: ["Semantic RAG", "Multi-Model Routing", "Guardrails"],
       highlights: [
         {
-          label: "Context-Aware AI and Seamantic RAG",
+          label: "Context-Aware AI and Semantic RAG",
           detail:
             "Hybrid vector + keyword retrieval, entity graphs and LiteLLM multi-model routing.",
         },
         {
           label: "Trust, Security & Guardrails",
           detail:
-            "Enforcing RBAC permission-aware retrieval, confidence-score thresholds, hallucination control, deterministic fallback flows that eliminate retry loops",
+            "Enforcing RBAC permission-aware retrieval, confidence-score thresholds, hallucination control, deterministic fallback flows that eliminate retry loops.",
         },
       ],
     },
@@ -144,6 +146,7 @@ export const PORTFOLIO_DATA = {
       description:
         "Treating internal/enterprise users as paying customers, omnichannel execution (Web and Slack), and dual-experience architecture (casual users vs. advanced technical power users).",
       accentColor: "emerald",
+      tags: ["Enterprise PLG", "Omnichannel UX", "Dual Experience"],
       highlights: [
         {
           label: "Enterprise PLG Mindset",
@@ -174,6 +177,11 @@ export const PORTFOLIO_DATA = {
         "Co-architecting a multi-cloud, permission-aware Enterprise AI Operating System scaled organically to ~5,000 active global users.",
       scale: "~5,000 active global users (engineers and non-engineers).",
       featured: true,
+      metrics: [
+        { value: "~5,000", label: "Active Global Users" },
+        { value: "Multi-Cloud", label: "AWS, GCP, Azure & Anthropic" },
+      ],
+      techStack: ["AWS Q & Bedrock", "GCP Vertex", "LiteLLM", "Slack API"],
       sections: [
         {
           label: "Scale",
@@ -210,8 +218,18 @@ export const PORTFOLIO_DATA = {
       subtitle:
         "Ruthless migration hierarchy across global enterprise stacks with strict SLAs and zero business downtime.",
       featured: false,
-      summary:
-        "Managed redundant internal and external applications across Finance, HR, Procurement, IT, etc. Established a ruthless migration hierarchy prioritizing revenue-critical pipelines with strict SLAs, completing global consolidation with zero business downtime.",
+      metrics: [
+        { value: "$4.4B", label: "Merger Scale" },
+        { value: "0", label: "Business Downtime" },
+      ],
+      techStack: ["Enterprise Systems", "Finance & HR Stack", "IT Infrastructure"],
+      sections: [
+        {
+          label: "Overview",
+          content:
+            "Managed redundant internal and external applications across Finance, HR, Procurement, IT, etc. Established a ruthless migration hierarchy prioritizing revenue-critical pipelines with strict SLAs, completing global consolidation with zero business downtime.",
+        },
+      ],
     },
     {
       id: "mission-critical-c2",
@@ -222,8 +240,18 @@ export const PORTFOLIO_DATA = {
       subtitle:
         "Real-time, low-cognitive-load C2 and air defense interfaces engineered for zero-error operational execution.",
       featured: false,
-      summary:
-        "Engineered real-time, low-cognitive-load C2 and air defense interfaces (including Iron Dome operations), leading cross-functional integration and engineering collaboration to ensure flawless execution and product success.",
+      metrics: [
+        { value: "Real-Time", label: "Low-Latency C2" },
+        { value: "Mission-Critical", label: "Iron Dome Operations" },
+      ],
+      techStack: ["C2 Architecture", "Real-Time Data Streams", "Defense Systems"],
+      sections: [
+        {
+          label: "Overview",
+          content:
+            "Engineered real-time, low-cognitive-load C2 and air defense interfaces (including Iron Dome operations), leading cross-functional integration and engineering collaboration to ensure flawless execution and product success.",
+        },
+      ],
     },
   ] as CaseStudy[],
 
