@@ -1,62 +1,33 @@
-# Tom Deutsch — Personal PM Portfolio & Executive One-Pager
+# Tom Deutsch — Executive One-Pager & Portfolio (Next.js App Router)
 
-A modern, high-end personal portfolio website and printable Executive One-Pager for **Tom Deutsch (Senior Product Manager & AI Systems Architect)**, inspired by Linear, Vercel, and Stripe aesthetics.
+A minimalist, dark-mode (Vercel / Linear aesthetic) Executive One-Pager & Portfolio built with **Next.js 14 (App Router)**, **TypeScript**, and **Tailwind CSS**.
 
-## Key Features Implemented
+## Core Architecture & Sections
 
-1. **Hero Section & Key Metrics Bar**
-   - Headline: *"Architecting Enterprise AI Agents & Platforms That Actually Scale."*
-   - 4 Executive Badges (`8+ Years Leadership`, `~5,000 MAU on U-AI Workspace`, `Full-Spectrum AI Stack`, `Major (Res.) IAF Battery Commander`).
-   - Quick CTAs for Case Studies, Executive One-Pager / Printable PDF CV, LinkedIn, and Email.
-2. **The 3 Pillars ("What I Bring to the Table")**
-   - Commercial AI & "Build vs. Buy" Strategy (Token Economics, P&L, proprietary data moats)
-   - Technical Depth: Agentic Systems & Architecture (Semantic RAG, LiteLLM routing, C2 reliability)
-   - Product-Led Growth (PLG) & Zero-Friction UX (Dual-Experience Web/Slack & Advanced Lab)
-3. **Selected Case Studies**
-   - **01: U-AI Workspace at Unity** (~5,000 active global users, multi-cloud stack, interactive system architecture blueprint)
-   - **02: Post-Merger Infrastructure Consolidation** ($4.4B Unity & ironSource merger, zero business downtime)
-   - **03: Mission-Critical Command & Control (C2) Platforms** (Elbit Systems & Israeli Air Force Iron Dome operations)
-4. **Thought Leadership**
-   - *Building the Enterprise AI Workspace* & *Why Product Managers Must Master Token Economics* (with interactive executive synthesis reader modals).
-5. **"Ask Tom's AI" Floating Widget**
-   - Connected to `/api/chat` (`src/app/api/chat/route.ts`) using Google AI Studio (`GEMINI_API_KEY`) with an automatic built-in Portfolio RAG knowledge base fallback so it works with zero configuration out of the box.
-6. **Zero-Dependency Instant Preview**
-   - Open `preview.html` directly in any browser for an immediate standalone interactive preview without needing a local build server.
+1. **Hero Section**
+   - **Name:** Tom Deutsch
+   - **Title:** Senior Product Manager & AI Systems Architect
+   - **Value Proposition:** Expert in architecting enterprise AI platforms, autonomous agents, and mission-critical systems from inception to scale.
+   - **Action CTAs:** View Case Studies, Download CV / One-Pager (interactive printable modal), LinkedIn (`https://www.linkedin.com/in/tom-deutsch`), and Email.
 
----
+2. **Core Experience & Expertise (Strictly Separated Domains)**
+   - **01 // AI & SaaS Product Leadership:** Enterprise AI platforms, autonomous agents, LLM integrations, workflow automation, and distributed systems at scale.
+   - **02 // Enterprise Platforms & Defense Tech (Critical Systems):**
+     - **Elbit Systems:** Complex technical platforms, software architectures, and data-intensive operational systems.
+     - **mPrest:** Product management and software architecture for distributed Command & Control (C2) systems and real-time mission-critical solutions under extreme conditions.
+   - **03 // Command & Leadership (IAF - Major Res.):**
+     - Active and reserve service as a **Major (רב-סרן)** and **Iron Dome Battery Commander**—high-stakes decision-making under extreme pressure, large-scale team management, and operating complex real-time systems.
 
-## Customizing Links & Content
+3. **Interactive AI Chat Widget (`AskTomsAIWidget.tsx` + `/api/chat`)**
+   - Floating corner AI assistant allowing recruiters and executives to interactively query Tom's background across AI/SaaS, C2/Defense (mPrest & Elbit), and IAF command leadership.
+   - Works out-of-the-box via its built-in domain knowledge engine, or connects to live Gemini 2.0 Flash when `GEMINI_API_KEY` is set.
 
-All profile URLs (LinkedIn, Email, CV), metrics, case studies, and AI system prompts are centralized in a single file:
-- `src/data/portfolio.ts`
+4. **Vercel Hobby Tier Ready (`vercel.json`)**
+   - Zero multi-region restrictions (`"regions"` is intentionally omitted) for frictionless deployment on Vercel's free Hobby tier.
 
----
-
-## Local Development (Next.js)
+## Local Development
 
 ```bash
 npm install
-cp .env.example .env.local
-# Add your GEMINI_API_KEY in .env.local (optional — fallback RAG works automatically)
 npm run dev
 ```
-
-Open `http://localhost:3000`.
-
----
-
-## Deployment
-
-### Option A: Google Cloud Run (GCP)
-The repository includes a multi-stage standalone `Dockerfile` (`PORT=8080`) and `cloudbuild.yaml`.
-
-```bash
-gcloud run deploy tom-deutsch-portfolio \
-  --source . \
-  --region us-central1 \
-  --allow-unauthenticated \
-  --set-env-vars="GEMINI_API_KEY=your_key_here"
-```
-
-### Option B: Vercel
-Import the repository into Vercel (or run `vercel --prod`). Set `GEMINI_API_KEY` in Project Environment Variables.

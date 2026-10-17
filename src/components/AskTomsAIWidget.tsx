@@ -7,10 +7,9 @@ import {
   Send,
   Bot,
   User,
-  Terminal,
-  Cpu,
   RotateCcw,
   ChevronRight,
+  Cpu,
 } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 
@@ -19,7 +18,6 @@ interface ChatMessage {
   role: "user" | "assistant";
   content: string;
   timestamp: string;
-  mode?: string;
 }
 
 export function AskTomsAIWidget() {
@@ -30,9 +28,8 @@ export function AskTomsAIWidget() {
     {
       id: "welcome",
       role: "assistant",
-      content: PORTFOLIO_DATA.aiAssistant.welcomeMessage,
+      content: PORTFOLIO_DATA.aiWidget.welcomeMessage,
       timestamp: "Ready",
-      mode: "Google AI Studio • Semantic RAG",
     },
   ]);
 
@@ -70,30 +67,26 @@ export function AskTomsAIWidget() {
       });
 
       const data = await res.json();
-      const assistantMsg: ChatMessage = {
-        id: `ai-${Date.now()}`,
-        role: "assistant",
-        content:
-          data.reply ||
-          "I couldn't reach the endpoint right now, but feel free to explore the case studies above!",
-        timestamp: "Verified Context",
-        mode:
-          data.mode === "google-ai-studio-live"
-            ? "Google AI Studio (Gemini 2.0)"
-            : "Portfolio RAG Engine",
-      };
-
-      setMessages((prev) => [...prev, assistantMsg]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `ai-${Date.now()}`,
+          role: "assistant",
+          content:
+            data.reply ||
+            "Feel free to ask about Tom's AI & SaaS product leadership, C2 architecture at mPrest & Elbit, or IAF command experience.",
+          timestamp: "Verified",
+        },
+      ]);
     } catch {
       setMessages((prev) => [
         ...prev,
         {
-          id: `err-${Date.now()}`,
+          id: `fallback-${Date.now()}`,
           role: "assistant",
           content:
-            "Tom scaled the **U-AI Workspace to ~5,000 MAU at Unity**, led the **$4.4B Unity-ironSource post-merger system consolidation**, and served as an **IAF Iron Dome Battery Commander (Major, Res.)**. Ask about any of these pillars!",
-          timestamp: "Local Fallback",
-          mode: "Resilient Fallback Mode",
+            "Tom Deutsch is a **Senior Product Manager & AI Systems Architect** specializing in **Enterprise AI & SaaS**, **Mission-Critical C2 Systems (mPrest & Elbit Systems)**, and **Command Leadership (IAF Major Res. / Iron Dome Battery Commander)**.",
+          timestamp: "Instant",
         },
       ]);
     } finally {
@@ -106,28 +99,23 @@ export function AskTomsAIWidget() {
       {
         id: "welcome",
         role: "assistant",
-        content: PORTFOLIO_DATA.aiAssistant.welcomeMessage,
+        content: PORTFOLIO_DATA.aiWidget.welcomeMessage,
         timestamp: "Ready",
-        mode: "Google AI Studio • Semantic RAG",
       },
     ]);
   };
 
-  // Simple markdown bold/bullet formatter for clean rendering
   const renderFormattedContent = (text: string) => {
     return text.split("\n").map((line, i) => {
       const trimmed = line.trim();
-      if (!trimmed) return <div key={i} className="h-2" />;
+      if (!trimmed) return <div key={i} className="h-1.5" />;
 
       const formatBold = (str: string) => {
         const parts = str.split(/(\*\*.*?\*\*)/g);
         return parts.map((part, idx) => {
           if (part.startsWith("**") && part.endsWith("**")) {
             return (
-              <strong
-                key={idx}
-                className="font-semibold text-zinc-900 dark:text-white"
-              >
+              <strong key={idx} className="font-semibold text-zinc-100">
                 {part.slice(2, -2)}
               </strong>
             );
@@ -139,7 +127,7 @@ export function AskTomsAIWidget() {
       if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
         return (
           <div key={i} className="flex items-start gap-2 pl-1 my-1">
-            <span className="text-indigo-500 dark:text-indigo-400 mt-1">•</span>
+            <span className="text-indigo-400 mt-0.5">•</span>
             <span>{formatBold(trimmed.slice(2))}</span>
           </div>
         );
@@ -154,28 +142,27 @@ export function AskTomsAIWidget() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 print:hidden">
-      {/* Chat Modal Panel */}
+    <div className="fixed bottom-6 right-6 z-50 print:hidden">
       {isOpen && (
-        <div className="mb-3 w-[92vw] sm:w-[420px] rounded-2xl border border-zinc-200/80 dark:border-zinc-800/90 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col transition-all duration-200">
+        <div className="mb-3.5 w-[92vw] sm:w-[400px] rounded-2xl border border-zinc-800/90 bg-zinc-950/95 backdrop-blur-2xl shadow-[0_24px_80px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col animate-in fade-in slide-in-from-bottom-2 duration-200">
           {/* Header */}
-          <div className="px-4 py-3.5 border-b border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/70 dark:bg-zinc-900/60 flex items-center justify-between">
+          <div className="px-4 py-3.5 border-b border-zinc-800/80 bg-zinc-900/50 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-sm">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-700/80 text-indigo-400">
                 <Cpu className="h-4 w-4" />
-                <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-zinc-950" />
+                <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-zinc-950" />
               </div>
               <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                    Ask Tom&apos;s AI
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold tracking-tight text-zinc-100">
+                    {PORTFOLIO_DATA.aiWidget.title}
                   </span>
-                  <span className="rounded-full bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 text-[10px] font-mono font-medium text-indigo-600 dark:text-indigo-400">
-                    AI Studio API
+                  <span className="rounded-md bg-indigo-500/10 border border-indigo-500/25 px-1.5 py-0.5 text-[10px] font-mono text-indigo-300">
+                    AI Agent
                   </span>
                 </div>
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
-                  Interactive Portfolio Agent • Grounded in Tom&apos;s Experience
+                <p className="text-[11px] text-zinc-400">
+                  {PORTFOLIO_DATA.aiWidget.subtitle}
                 </p>
               </div>
             </div>
@@ -183,22 +170,22 @@ export function AskTomsAIWidget() {
               <button
                 onClick={resetChat}
                 title="Reset conversation"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800 transition-colors"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/80 transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                aria-label="Close Ask Tom's AI"
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800 transition-colors"
+                aria-label="Close AI Widget"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/80 transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
           </div>
 
-          {/* Messages Body */}
-          <div className="h-[360px] overflow-y-auto p-4 space-y-4 text-xs sm:text-[13px]">
+          {/* Messages */}
+          <div className="h-[340px] overflow-y-auto p-4 space-y-3.5 text-xs">
             {messages.map((m) => (
               <div
                 key={m.id}
@@ -207,32 +194,23 @@ export function AskTomsAIWidget() {
                 }`}
               >
                 {m.role === "assistant" && (
-                  <div className="h-6 w-6 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shrink-0 mt-0.5">
-                    <Bot className="h-3.5 w-3.5 text-indigo-500" />
+                  <div className="h-6 w-6 rounded-md bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0 mt-0.5">
+                    <Bot className="h-3.5 w-3.5 text-indigo-400" />
                   </div>
                 )}
 
                 <div
                   className={`max-w-[85%] rounded-xl px-3.5 py-2.5 ${
                     m.role === "user"
-                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-medium"
-                      : "bg-zinc-100/80 dark:bg-zinc-900/90 border border-zinc-200/70 dark:border-zinc-800/80 text-zinc-700 dark:text-zinc-300"
+                      ? "bg-zinc-100 text-zinc-950 font-medium"
+                      : "bg-zinc-900/90 border border-zinc-800/90 text-zinc-300"
                   }`}
                 >
                   <div>{renderFormattedContent(m.content)}</div>
-                  {m.mode && (
-                    <div className="mt-2 pt-1.5 border-t border-zinc-200/60 dark:border-zinc-800/70 flex items-center justify-between text-[10px] font-mono text-zinc-400 dark:text-zinc-500">
-                      <span className="flex items-center gap-1">
-                        <Terminal className="h-2.5 w-2.5" />
-                        {m.mode}
-                      </span>
-                      <span>{m.timestamp}</span>
-                    </div>
-                  )}
                 </div>
 
                 {m.role === "user" && (
-                  <div className="h-6 w-6 rounded-md bg-indigo-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="h-6 w-6 rounded-md bg-zinc-800 text-zinc-200 flex items-center justify-center shrink-0 mt-0.5">
                     <User className="h-3.5 w-3.5" />
                   </div>
                 )}
@@ -240,29 +218,28 @@ export function AskTomsAIWidget() {
             ))}
 
             {isLoading && (
-              <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 pl-8">
-                <span className="inline-block h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
+              <div className="flex items-center gap-2 text-xs text-zinc-400 pl-8">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-indigo-400 animate-ping" />
                 <span className="font-mono text-[11px]">
-                  Synthesizing from Tom&apos;s architecture & case study graph...
+                  Querying portfolio knowledge graph...
                 </span>
               </div>
             )}
 
-            {/* Suggested Prompts */}
             {messages.length <= 2 && !isLoading && (
               <div className="pt-2 space-y-1.5">
-                <p className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                  Suggested Executive Prompts:
+                <p className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
+                  Suggested Questions
                 </p>
                 <div className="flex flex-col gap-1.5">
-                  {PORTFOLIO_DATA.aiAssistant.suggestedPrompts.map((prompt) => (
+                  {PORTFOLIO_DATA.aiWidget.suggestedQuestions.map((q) => (
                     <button
-                      key={prompt}
-                      onClick={() => sendMessage(prompt)}
-                      className="text-left text-xs px-3 py-2 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/40 hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:bg-indigo-50/30 dark:hover:bg-indigo-950/20 text-zinc-700 dark:text-zinc-300 transition-all flex items-center justify-between group"
+                      key={q}
+                      onClick={() => sendMessage(q)}
+                      className="text-left text-xs px-3 py-2 rounded-lg border border-zinc-800/90 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-900 text-zinc-300 transition-all flex items-center justify-between group"
                     >
-                      <span>{prompt}</span>
-                      <ChevronRight className="h-3.5 w-3.5 text-zinc-400 group-hover:text-indigo-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+                      <span>{q}</span>
+                      <ChevronRight className="h-3.5 w-3.5 text-zinc-500 group-hover:text-zinc-200 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </button>
                   ))}
                 </div>
@@ -272,26 +249,26 @@ export function AskTomsAIWidget() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Footer */}
+          {/* Input */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
               sendMessage();
             }}
-            className="p-3 border-t border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/40 flex items-center gap-2"
+            className="p-3 border-t border-zinc-800/80 bg-zinc-900/40 flex items-center gap-2"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about U-AI (~5K MAU), Token Economics, C2..."
-              className="flex-1 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+              placeholder="Ask about AI platforms, mPrest/Elbit C2, or IAF command..."
+              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2 text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              aria-label="Send question"
-              className="p-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-zinc-900 disabled:opacity-40 transition-colors"
+              aria-label="Send message"
+              className="p-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 disabled:opacity-40 transition-colors"
             >
               <Send className="h-3.5 w-3.5" />
             </button>
@@ -299,18 +276,18 @@ export function AskTomsAIWidget() {
         </div>
       )}
 
-      {/* Floating Launcher Pill */}
+      {/* Floating Button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="group flex items-center gap-2.5 rounded-full border border-zinc-200/80 dark:border-zinc-700/80 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-4 py-3 shadow-xl hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-[0.99] transition-all"
+        className="group flex items-center gap-2.5 rounded-full border border-zinc-700/80 bg-zinc-900/95 hover:bg-zinc-800 text-zinc-100 px-4 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-md hover:border-zinc-600 transition-all duration-200"
       >
-        <span className="relative flex h-2.5 w-2.5">
+        <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-400" />
         </span>
-        <Sparkles className="h-4 w-4 text-indigo-400 dark:text-indigo-600" />
-        <span className="text-xs sm:text-sm font-semibold tracking-tight">
-          {isOpen ? "Close Tom's AI" : "Ask Tom's AI"}
+        <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
+        <span className="text-xs font-medium tracking-tight">
+          {isOpen ? "Close AI Assistant" : "Ask Tom's AI"}
         </span>
       </button>
     </div>

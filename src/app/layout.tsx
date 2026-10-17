@@ -17,11 +17,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Tom Deutsch | Senior Product Manager & AI Systems Architect",
   description:
-    "Architecting Enterprise AI Agents & Platforms That Actually Scale. From commanding Iron Dome C2 systems to scaling the U-AI Workspace for ~5,000 active users at Unity.",
+    "Expert in architecting enterprise AI platforms, autonomous agents, and mission-critical systems from inception to scale.",
   openGraph: {
     title: "Tom Deutsch — Senior Product Manager & AI Systems Architect",
     description:
-      "Bridging deep technical architectures and commercial ROI. Scaled U-AI Workspace to ~5,000 MAU at Unity | $4.4B Merger Infrastructure | IAF Major (Res.).",
+      "Expert in architecting enterprise AI platforms, autonomous agents, and mission-critical systems from inception to scale.",
     type: "website",
   },
 };
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#09090b] text-zinc-100`}
       >
         {children}
       </body>
