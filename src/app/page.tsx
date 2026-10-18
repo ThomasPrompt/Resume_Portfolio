@@ -91,8 +91,8 @@ export default function PortfolioHomePage() {
             </div>
           </div>
 
-          {/* Section Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+          {/* Section Links - Now Cleanly Fitted in One Single Line */}
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
             <a
               href="#pillars"
               className="hover:text-zinc-900 dark:hover:text-white transition-colors"
@@ -120,7 +120,7 @@ export default function PortfolioHomePage() {
             </button>
           </nav>
 
-          {/* Header Actions & Theme Switcher */}
+          {/* Header Actions & Theme Switcher (CV & LinkedIn removed from here) */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsDark((prev) => !prev)}
@@ -142,25 +142,6 @@ export default function PortfolioHomePage() {
               <FileText className="h-3 w-3 text-indigo-500" />
               <span>1-Pager</span>
             </button>
-
-            <a
-              href={PORTFOLIO_DATA.hero.ctas.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/70 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-colors"
-            >
-              <Linkedin className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
-              <span>LinkedIn</span>
-            </a>
-
-            <a
-              href={PORTFOLIO_DATA.hero.ctas.cvHref}
-              download={PORTFOLIO_DATA.hero.ctas.cvFileName}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-3 py-1.5 text-xs font-medium text-white dark:text-zinc-950 transition-colors shadow-sm"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span>Download CV</span>
-            </a>
           </div>
         </div>
       </header>
@@ -205,7 +186,7 @@ export default function PortfolioHomePage() {
                 {PORTFOLIO_DATA.hero.subHeadline}
               </p>
 
-              {/* Call-to-Action Buttons: [View Case Studies ↓] | [Download CV] | [LinkedIn / Email] */}
+              {/* Call-to-Action Buttons */}
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <a
                   href={PORTFOLIO_DATA.hero.ctas.caseStudiesAnchor}
@@ -260,10 +241,10 @@ export default function PortfolioHomePage() {
               </div>
             </div>
 
-            {/* Right Column: Interactive AI Agent & Executive One-Pager Card */}
+            {/* Right Column: Interactive AI Agent & Executive One-Pager Card (CV buttons removed) */}
             <div className="lg:col-span-5">
-              <div className="rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.09] via-cyan-500/[0.05] to-emerald-500/[0.05] p-6 sm:p-7 space-y-5 shadow-sm">
-                <div className="space-y-2.5">
+              <div className="rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.09] via-cyan-500/[0.05] to-emerald-500/[0.05] p-6 sm:p-7 space-y-4 shadow-sm">
+                <div className="space-y-2">
                   <div className="inline-flex items-center gap-2 text-xs font-mono text-indigo-600 dark:text-indigo-300">
                     <Sparkles className="h-3.5 w-3.5" />
                     <span>INTERACTIVE AI AGENT & EXECUTIVE ONE-PAGER</span>
@@ -275,26 +256,8 @@ export default function PortfolioHomePage() {
                     Use the floating <strong>&ldquo;Ask Tom&apos;s AI&rdquo;</strong>{" "}
                     widget in the bottom-right corner (connected to our Google AI
                     Studio API endpoint) to query Tom&apos;s experience directly,
-                    or open the printable Executive One-Pager.
+                    or open the printable Executive One-Pager via the top navigation.
                   </p>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3 pt-1">
-                  <button
-                    onClick={() => setIsOnePagerOpen(true)}
-                    className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-900 dark:text-zinc-100 transition-colors"
-                  >
-                    <FileText className="h-3.5 w-3.5 text-indigo-500" />
-                    <span>View Printable One-Pager</span>
-                  </button>
-                  <a
-                    href={PORTFOLIO_DATA.hero.ctas.cvHref}
-                    download={PORTFOLIO_DATA.hero.ctas.cvFileName}
-                    className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-4 py-2.5 text-xs font-semibold text-white dark:text-zinc-950 transition-colors"
-                  >
-                    <Download className="h-3.5 w-3.5" />
-                    <span>Download Full CV</span>
-                  </a>
                 </div>
               </div>
             </div>
@@ -545,7 +508,7 @@ export default function PortfolioHomePage() {
                       </h3>
 
                       <p className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                        {cs.summary}
+                        {cs.sections?.[0]?.content || cs.summary}
                       </p>
 
                       {/* Mini Metrics */}
