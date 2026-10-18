@@ -171,76 +171,131 @@ export default function PortfolioHomePage() {
             1. HERO SECTION
         ========================================================= */}
         <section aria-label="Hero" className="space-y-8">
-          <div className="max-w-4xl space-y-5">
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-indigo-500/10 px-3 py-1 text-[11px] font-mono text-indigo-700 dark:text-indigo-300">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{PORTFOLIO_DATA.hero.name}</span>
-              <span className="text-indigo-400/60">•</span>
-              <span>{PORTFOLIO_DATA.hero.role}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Column: Hero Headline, Sub-headline & Primary CTAs */}
+            <div className="lg:col-span-7 space-y-5">
+              {/* Status Pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-indigo-500/10 px-3 py-1 text-[11px] font-mono text-indigo-700 dark:text-indigo-300">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>{PORTFOLIO_DATA.hero.name}</span>
+                <span className="text-indigo-400/60">•</span>
+                <span>{PORTFOLIO_DATA.hero.role}</span>
+              </div>
+
+              {/* Headline with colorful gradient on "That Actually Scale." */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-white leading-[1.08]">
+                {PORTFOLIO_DATA.hero.headline.includes("That Actually Scale.") ? (
+                  <>
+                    {
+                      PORTFOLIO_DATA.hero.headline.split(
+                        "That Actually Scale."
+                      )[0]
+                    }
+                    <span className="bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+                      That Actually Scale.
+                    </span>
+                  </>
+                ) : (
+                  PORTFOLIO_DATA.hero.headline
+                )}
+              </h1>
+
+              {/* Sub-headline */}
+              <p className="text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl">
+                {PORTFOLIO_DATA.hero.subHeadline}
+              </p>
+
+              {/* Call-to-Action Buttons: [View Case Studies ↓] | [Download CV] | [LinkedIn / Email] */}
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <a
+                  href={PORTFOLIO_DATA.hero.ctas.caseStudiesAnchor}
+                  className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-5 py-3 text-xs sm:text-sm font-semibold text-white dark:text-zinc-950 shadow-sm transition-all"
+                >
+                  <span>View Case Studies</span>
+                  <ArrowDown className="h-4 w-4 text-indigo-400 dark:text-indigo-600" />
+                </a>
+
+                <a
+                  href={PORTFOLIO_DATA.hero.ctas.cvHref}
+                  download={PORTFOLIO_DATA.hero.ctas.cvFileName}
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 px-5 py-3 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 transition-all"
+                >
+                  <Download className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                  <span>Download CV</span>
+                </a>
+
+                {/* LinkedIn / Email Group */}
+                <div className="inline-flex items-center rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/60 overflow-hidden shadow-sm">
+                  <a
+                    href={PORTFOLIO_DATA.hero.ctas.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
+                  >
+                    <Linkedin className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                    <span>LinkedIn</span>
+                    <ExternalLink className="h-3 w-3 text-zinc-400" />
+                  </a>
+                  <span className="h-5 w-px bg-zinc-200 dark:bg-zinc-800" />
+                  <a
+                    href={PORTFOLIO_DATA.hero.ctas.email}
+                    className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-3.5 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
+                  >
+                    <Mail className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                    <span>Email</span>
+                  </a>
+                  <button
+                    onClick={handleCopyEmail}
+                    title="Copy email address (tomdeutsch86@gmail.com)"
+                    aria-label="Copy email address"
+                    className="border-l border-zinc-200 dark:border-zinc-800 px-3 py-3 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  >
+                    {copiedEmail ? (
+                      <Check className="h-4 w-4 text-emerald-500" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-white leading-[1.08]">
-              {PORTFOLIO_DATA.hero.headline}
-            </h1>
+            {/* Right Column: Interactive AI Agent & Executive One-Pager Card */}
+            <div className="lg:col-span-5">
+              <div className="rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.09] via-cyan-500/[0.05] to-emerald-500/[0.05] p-6 sm:p-7 space-y-5 shadow-sm">
+                <div className="space-y-2.5">
+                  <div className="inline-flex items-center gap-2 text-xs font-mono text-indigo-600 dark:text-indigo-300">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    <span>INTERACTIVE AI AGENT & EXECUTIVE ONE-PAGER</span>
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white leading-snug">
+                    Evaluating Tom for a Senior PM or AI Systems Architect Role?
+                  </h2>
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                    Use the floating <strong>&ldquo;Ask Tom&apos;s AI&rdquo;</strong>{" "}
+                    widget in the bottom-right corner (connected to our Google AI
+                    Studio API endpoint) to query Tom&apos;s experience directly,
+                    or open the printable Executive One-Pager.
+                  </p>
+                </div>
 
-            {/* Sub-headline */}
-            <p className="text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl">
-              {PORTFOLIO_DATA.hero.subHeadline}
-            </p>
-
-            {/* Call-to-Action Buttons: [View Case Studies ↓] | [Download CV] | [LinkedIn / Email] */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <a
-                href={PORTFOLIO_DATA.hero.ctas.caseStudiesAnchor}
-                className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-5 py-3 text-xs sm:text-sm font-semibold text-white dark:text-zinc-950 shadow-sm transition-all"
-              >
-                <span>View Case Studies</span>
-                <ArrowDown className="h-4 w-4 text-indigo-400 dark:text-indigo-600" />
-              </a>
-
-              <a
-                href={PORTFOLIO_DATA.hero.ctas.cvHref}
-                download={PORTFOLIO_DATA.hero.ctas.cvFileName}
-                className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 px-5 py-3 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 transition-all"
-              >
-                <Download className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                <span>Download CV</span>
-              </a>
-
-              {/* LinkedIn / Email Group */}
-              <div className="inline-flex items-center rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/60 overflow-hidden shadow-sm">
-                <a
-                  href={PORTFOLIO_DATA.hero.ctas.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
-                >
-                  <Linkedin className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                  <span>LinkedIn</span>
-                  <ExternalLink className="h-3 w-3 text-zinc-400" />
-                </a>
-                <span className="h-5 w-px bg-zinc-200 dark:bg-zinc-800" />
-                <a
-                  href={PORTFOLIO_DATA.hero.ctas.email}
-                  className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-3.5 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
-                >
-                  <Mail className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                  <span>Email</span>
-                </a>
-                <button
-                  onClick={handleCopyEmail}
-                  title="Copy email address (tomdeutsch86@gmail.com)"
-                  aria-label="Copy email address"
-                  className="border-l border-zinc-200 dark:border-zinc-800 px-3 py-3 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                >
-                  {copiedEmail ? (
-                    <Check className="h-4 w-4 text-emerald-500" />
-                  ) : (
-                    <Copy className="h-4 w-4" />
-                  )}
-                </button>
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <button
+                    onClick={() => setIsOnePagerOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-900 dark:text-zinc-100 transition-colors"
+                  >
+                    <FileText className="h-3.5 w-3.5 text-indigo-500" />
+                    <span>View Printable One-Pager</span>
+                  </button>
+                  <a
+                    href={PORTFOLIO_DATA.hero.ctas.cvHref}
+                    download={PORTFOLIO_DATA.hero.ctas.cvFileName}
+                    className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-4 py-2.5 text-xs font-semibold text-white dark:text-zinc-950 transition-colors"
+                  >
+                    <Download className="h-3.5 w-3.5" />
+                    <span>Download Full CV</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -296,7 +351,8 @@ export default function PortfolioHomePage() {
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-md">
-              Bridging commercial P&L discipline, deep agentic system architecture, and zero-friction Product-Led Growth.
+              Bridging commercial P&L discipline, deep agentic system
+              architecture, and zero-friction Product-Led Growth.
             </p>
           </div>
 
@@ -364,18 +420,6 @@ export default function PortfolioHomePage() {
                       ))}
                     </ul>
                   </div>
-
-                  {/* Tags */}
-                  <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800/60 flex flex-wrap gap-1.5">
-                    {pillar.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/70 px-2.5 py-0.5 text-[10px] font-mono text-zinc-600 dark:text-zinc-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               );
             })}
@@ -396,7 +440,8 @@ export default function PortfolioHomePage() {
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-md">
-              From scaling Enterprise AI Operating Systems (~5,000 MAU) to $4.4B M&A consolidations and Iron Dome C2 platforms.
+              From scaling Enterprise AI Operating Systems (~5,000 MAU) to \$4.4B
+              M&A consolidations and Iron Dome C2 platforms.
             </p>
           </div>
 
@@ -551,7 +596,8 @@ export default function PortfolioHomePage() {
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-md">
-              Field-tested insights on Enterprise AI Operating Systems, proprietary data moats, and AI Token Economics.
+              Field-tested insights on Enterprise AI Operating Systems,
+              proprietary data moats, and AI Token Economics.
             </p>
           </div>
 
@@ -641,42 +687,6 @@ export default function PortfolioHomePage() {
                 );
               }
             )}
-          </div>
-        </section>
-
-        {/* =========================================================
-            5. INTERACTIVE CALLOUT BANNER ("ASK TOM'S AI" + ONE-PAGER)
-        ========================================================= */}
-        <section className="rounded-2xl border border-indigo-500/30 bg-gradient-to-r from-indigo-500/[0.08] via-cyan-500/[0.05] to-emerald-500/[0.05] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-indigo-600 dark:text-indigo-300">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>INTERACTIVE AI AGENT & EXECUTIVE ONE-PAGER</span>
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white">
-              Evaluating Tom for a Senior PM or AI Systems Architect Role?
-            </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-              Use the floating <strong>&ldquo;Ask Tom&apos;s AI&rdquo;</strong> widget in the bottom-right corner (connected to our Google AI Studio API endpoint) to query Tom&apos;s experience directly, or open the printable Executive One-Pager.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <button
-              onClick={() => setIsOnePagerOpen(true)}
-              className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-900 dark:text-zinc-100 transition-colors"
-            >
-              <FileText className="h-3.5 w-3.5 text-indigo-500" />
-              <span>View Printable One-Pager</span>
-            </button>
-            <a
-              href={PORTFOLIO_DATA.hero.ctas.cvHref}
-              download={PORTFOLIO_DATA.hero.ctas.cvFileName}
-              className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-4 py-2.5 text-xs font-semibold text-white dark:text-zinc-950 transition-colors"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span>Download Full CV</span>
-            </a>
           </div>
         </section>
       </main>
