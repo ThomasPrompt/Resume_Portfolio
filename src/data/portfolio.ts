@@ -14,7 +14,6 @@ export interface CorePillar {
     label: string;
     detail: string;
   }[];
-  tags: string[];
   accentColor: "indigo" | "cyan" | "emerald";
 }
 
@@ -97,7 +96,6 @@ export const PORTFOLIO_DATA = {
       description:
         "Token Economics & P&L mindset, defensible proprietary data moats, and ruthless MVP scoping.",
       accentColor: "indigo",
-      tags: ["Token Economics", "Data Moats", "MVP Scoping"],
       highlights: [
         {
           label: "Token Economics & P&L Mindset",
@@ -124,7 +122,6 @@ export const PORTFOLIO_DATA = {
       description:
         "Context-aware AI (Semantic RAG, entity graphs, multi-model routing), trust and guardrails (hallucination control and proactive fallbacks).",
       accentColor: "cyan",
-      tags: ["Semantic RAG", "Multi-Model Routing", "Guardrails"],
       highlights: [
         {
           label: "Context-Aware AI and Semantic RAG",
@@ -146,7 +143,6 @@ export const PORTFOLIO_DATA = {
       description:
         "Treating internal/enterprise users as paying customers, omnichannel execution (Web and Slack), and dual-experience architecture (casual users vs. advanced technical power users).",
       accentColor: "emerald",
-      tags: ["Enterprise PLG", "Omnichannel UX", "Dual Experience"],
       highlights: [
         {
           label: "Enterprise PLG Mindset",
