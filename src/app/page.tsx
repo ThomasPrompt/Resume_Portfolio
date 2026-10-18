@@ -186,11 +186,11 @@ export default function PortfolioHomePage() {
                 {PORTFOLIO_DATA.hero.subHeadline}
               </p>
 
-              {/* Call-to-Action Buttons */}
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              {/* Call-to-Action Buttons - Forced in one single line */}
+              <div className="pt-2 flex flex-row flex-wrap items-center gap-3">
                 <a
                   href={PORTFOLIO_DATA.hero.ctas.caseStudiesAnchor}
-                  className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-5 py-3 text-xs sm:text-sm font-semibold text-white dark:text-zinc-950 shadow-sm transition-all"
+                  className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-4.5 py-3 text-xs sm:text-sm font-semibold text-white dark:text-zinc-950 shadow-sm transition-all whitespace-nowrap"
                 >
                   <span>View Case Studies</span>
                   <ArrowDown className="h-4 w-4 text-indigo-400 dark:text-indigo-600" />
@@ -199,19 +199,19 @@ export default function PortfolioHomePage() {
                 <a
                   href={PORTFOLIO_DATA.hero.ctas.cvHref}
                   download={PORTFOLIO_DATA.hero.ctas.cvFileName}
-                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 px-5 py-3 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 transition-all"
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 px-4.5 py-3 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 transition-all whitespace-nowrap"
                 >
                   <Download className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   <span>Download CV</span>
                 </a>
 
                 {/* LinkedIn / Email Group */}
-                <div className="inline-flex items-center rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/60 overflow-hidden shadow-sm">
+                <div className="inline-flex items-center rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/60 overflow-hidden shadow-sm whitespace-nowrap">
                   <a
                     href={PORTFOLIO_DATA.hero.ctas.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
+                    className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-3.5 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
                   >
                     <Linkedin className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                     <span>LinkedIn</span>
@@ -489,7 +489,7 @@ export default function PortfolioHomePage() {
                 </div>
               ))}
 
-            {/* Case Studies 02 & 03 Side-by-Side (Tags completely removed) */}
+            {/* Case Studies 02 & 03 Side-by-Side */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {PORTFOLIO_DATA.caseStudies
                 .filter((cs) => !cs.featured)
