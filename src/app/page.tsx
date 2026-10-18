@@ -153,8 +153,8 @@ export default function PortfolioHomePage() {
         ========================================================= */}
         <section aria-label="Hero" className="space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Column: Hero Headline, Sub-headline & Primary CTAs */}
-            <div className="lg:col-span-7 space-y-5">
+            {/* Left Column: Hero Headline, Sub-headline & Primary CTAs (Expanded to 7 cols with proper breathing room) */}
+            <div className="lg:col-span-7 space-y-6">
               {/* Status Pill */}
               <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-indigo-500/10 px-3 py-1 text-[11px] font-mono text-indigo-700 dark:text-indigo-300">
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -182,15 +182,15 @@ export default function PortfolioHomePage() {
               </h1>
 
               {/* Sub-headline */}
-              <p className="text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl">
+              <p className="text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl">
                 {PORTFOLIO_DATA.hero.subHeadline}
               </p>
 
-              {/* Call-to-Action Buttons - Forced in one single line */}
-              <div className="pt-2 flex flex-row flex-wrap items-center gap-3">
+              {/* Call-to-Action Buttons - Clean horizontal layout with proper button padding */}
+              <div className="pt-2 flex flex-wrap items-center gap-3">
                 <a
                   href={PORTFOLIO_DATA.hero.ctas.caseStudiesAnchor}
-                  className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-4.5 py-3 text-xs sm:text-sm font-semibold text-white dark:text-zinc-950 shadow-sm transition-all whitespace-nowrap"
+                  className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white px-5 py-3 text-xs sm:text-sm font-semibold text-white dark:text-zinc-950 shadow-sm transition-all whitespace-nowrap"
                 >
                   <span>View Case Studies</span>
                   <ArrowDown className="h-4 w-4 text-indigo-400 dark:text-indigo-600" />
@@ -199,7 +199,7 @@ export default function PortfolioHomePage() {
                 <a
                   href={PORTFOLIO_DATA.hero.ctas.cvHref}
                   download={PORTFOLIO_DATA.hero.ctas.cvFileName}
-                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 px-4.5 py-3 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 transition-all whitespace-nowrap"
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 px-5 py-3 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 transition-all whitespace-nowrap"
                 >
                   <Download className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   <span>Download CV</span>
@@ -211,7 +211,7 @@ export default function PortfolioHomePage() {
                     href={PORTFOLIO_DATA.hero.ctas.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-3.5 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
+                    className="inline-flex items-center gap-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-4 py-3 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-200 transition-colors"
                   >
                     <Linkedin className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                     <span>LinkedIn</span>
@@ -472,7 +472,7 @@ export default function PortfolioHomePage() {
                     ))}
                   </div>
 
-                  {/* Tech Stack Pills */}
+                  {/* Architecture Stack */}
                   <div className="mt-6 pt-4 border-t border-zinc-200/70 dark:border-zinc-800/70 flex flex-wrap items-center gap-2">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 mr-1">
                       Architecture Stack:
