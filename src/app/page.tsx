@@ -91,7 +91,7 @@ export default function PortfolioHomePage() {
             </div>
           </div>
 
-          {/* Section Links - Now Cleanly Fitted in One Single Line */}
+          {/* Section Links */}
           <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
             <a
               href="#pillars"
@@ -120,7 +120,7 @@ export default function PortfolioHomePage() {
             </button>
           </nav>
 
-          {/* Header Actions & Theme Switcher (CV & LinkedIn removed from here) */}
+          {/* Header Actions & Theme Switcher */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsDark((prev) => !prev)}
@@ -241,7 +241,7 @@ export default function PortfolioHomePage() {
               </div>
             </div>
 
-            {/* Right Column: Interactive AI Agent & Executive One-Pager Card (CV buttons removed) */}
+            {/* Right Column: Interactive AI Agent & Executive One-Pager Card */}
             <div className="lg:col-span-5">
               <div className="rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.09] via-cyan-500/[0.05] to-emerald-500/[0.05] p-6 sm:p-7 space-y-4 shadow-sm">
                 <div className="space-y-2">
@@ -489,7 +489,7 @@ export default function PortfolioHomePage() {
                 </div>
               ))}
 
-            {/* Case Studies 02 & 03 Side-by-Side */}
+            {/* Case Studies 02 & 03 Side-by-Side (Tags completely removed) */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {PORTFOLIO_DATA.caseStudies
                 .filter((cs) => !cs.featured)
@@ -527,17 +527,6 @@ export default function PortfolioHomePage() {
                           </div>
                         ))}
                       </div>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800/60 flex flex-wrap gap-1.5">
-                      {cs.techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/70 px-2 py-0.5 text-[10px] font-mono text-zinc-600 dark:text-zinc-400"
-                        >
-                          {tech}
-                        </span>
-                      ))}
                     </div>
                   </div>
                 ))}
